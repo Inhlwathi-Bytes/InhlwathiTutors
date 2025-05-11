@@ -37,7 +37,7 @@ namespace InhlwathiTutors.Services.Implementation
                 issuer: _issuer,
                 audience: _audience,
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(30),
+                expires: DateTime.UtcNow.AddHours(4),
                 signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

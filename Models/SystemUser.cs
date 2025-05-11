@@ -11,11 +11,10 @@ namespace InhlwathiTutors.Models
         public string StudentNumber { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Institution { get; set; }
-
+        public string Location { get; set; }
+        public string mode { get; set; }
+        public Tutorship Tutorship { get; set; }
         public SystemUser() { }
-
-        // Constructor initializing all non-nullable properties
         public SystemUser(string studentNumber, string firstName, string lastName, string email)
         {
             StudentNumber = studentNumber ?? throw new ArgumentNullException(nameof(studentNumber));

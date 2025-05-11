@@ -18,6 +18,12 @@ namespace InhlwathiTutors.Data
         {
         }
 
+        public DbSet<SystemUser> SystemUsers { get; set; }
+        public DbSet<Tutorship> Tutorships { get; set; }
+        public DbSet<TutorshipSubject> TutorshipSubjects { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<TutorshipLanguage> TutorshipLanguages { get; set; }
+        public DbSet<TutorshipSubjectLanguage> TutorshipSubjectLanguages { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
