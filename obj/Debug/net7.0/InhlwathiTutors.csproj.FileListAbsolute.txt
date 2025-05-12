@@ -50,3 +50,4 @@ C:\Users\user\source\repos\InhlwathiTutors\obj\Debug\net7.0\InhlwathiTutors.genr
 C:\Users\user\source\repos\InhlwathiTutors\obj\Debug\net7.0\ref\InhlwathiTutors.dll
 C:\Users\user\source\repos\InhlwathiTutors\bin\Debug\net7.0\Humanizer.dll
 C:\Users\user\source\repos\InhlwathiTutors\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\user\source\repos\InhlwathiTutors\bin\Debug\net7.0\InhlwathiTutors.staticwebassets.runtime.json

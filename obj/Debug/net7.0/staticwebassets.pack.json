@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\InhlwathiTutors\\wwwroot\\uploads\\tutor_588d3357-c014-4153-bdc3-99421c5af47e.jpg",
+      "PackagePath": "staticwebassets\\uploads\\tutor_588d3357-c014-4153-bdc3-99421c5af47e.jpg"
+    },
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\InhlwathiTutors\\wwwroot\\uploads\\tutor_694aa36f-8402-427c-8fbc-af8b9f4e706c.jpg",
+      "PackagePath": "staticwebassets\\uploads\\tutor_694aa36f-8402-427c-8fbc-af8b9f4e706c.jpg"
+    },
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\InhlwathiTutors\\wwwroot\\uploads\\tutor_6da502ad-0890-4299-85c8-767f48806bdf.jpg",
+      "PackagePath": "staticwebassets\\uploads\\tutor_6da502ad-0890-4299-85c8-767f48806bdf.jpg"
+    },
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\InhlwathiTutors\\wwwroot\\uploads\\tutor_db6a18e8-c1e7-4353-aaf4-3fbdd126167c.jpg",
+      "PackagePath": "staticwebassets\\uploads\\tutor_db6a18e8-c1e7-4353-aaf4-3fbdd126167c.jpg"
+    },
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\InhlwathiTutors\\wwwroot\\uploads\\tutor_e4c0f54b-480d-4b12-b4ed-d0a0e7e10090.jpg",
+      "PackagePath": "staticwebassets\\uploads\\tutor_e4c0f54b-480d-4b12-b4ed-d0a0e7e10090.jpg"
+    },
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\InhlwathiTutors\\wwwroot\\uploads\\tutor_f3084cb3-e9d8-4c58-a909-72743d80949e.jpg",
+      "PackagePath": "staticwebassets\\uploads\\tutor_f3084cb3-e9d8-4c58-a909-72743d80949e.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.InhlwathiTutors.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.InhlwathiTutors.props",
+      "PackagePath": "build\\InhlwathiTutors.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.InhlwathiTutors.props",
+      "PackagePath": "buildMultiTargeting\\InhlwathiTutors.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.InhlwathiTutors.props",
+      "PackagePath": "buildTransitive\\InhlwathiTutors.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

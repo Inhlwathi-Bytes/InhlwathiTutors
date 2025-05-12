@@ -25,15 +25,23 @@ namespace InhlwathiTutors.Controllers
                 StudentNumber = model.StudentNumber,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                Location = model.Institution
+                Location = model.Location,
+                mode = "student"
             };
 
-            var (result, token) = await _authService.RegisterWithTokenAsync(user, model.Password);
+            try
+            {
+                var (result, token) = await _authService.RegisterWithTokenAsync(user, model.Password);
 
-            if (!result.Succeeded)
-                return BadRequest(result.Errors);
+                if (!result.Succeeded)
+                    return BadRequest(result.Errors);
 
-            return Ok(new { Token = token });
+                return Ok(new { Token = token });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while registering the user.", detail = ex.Message });
+            }
         }
 
         [HttpPost("login")]
@@ -61,7 +69,7 @@ namespace InhlwathiTutors.Controllers
         public string StudentNumber { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Institution { get; set; }
+        public string Location { get; set; }
     }
 
     public class LoginRequest

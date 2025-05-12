@@ -26,8 +26,12 @@ public class TutorshipService : ITutorshipService
             {
                 SystemUserId = userId,
                 Bio = dto.Bio,
-                Qualifications = dto.Qualifications,
-                Achievements = dto.Achievements,
+                Age = dto.Age,
+                Street = dto.Street,
+                City = dto.City,
+                Province = dto.Province,
+                PostalCode = dto.PostalCode,
+                HighestAchievement = dto.HighestAchievement,
                 IsAvailable = dto.IsAvailable,
                 YearsOfExperience = dto.YearsOfExperience,
                 CreatedAt = DateTime.UtcNow,
@@ -36,7 +40,7 @@ public class TutorshipService : ITutorshipService
             };
 
             _context.Tutorships.Add(tutorship);
-            await _context.SaveChangesAsync(); // tutorship.Id is now available
+            await _context.SaveChangesAsync(); 
 
             var languages = dto.LanguageIds.Select(langId => new TutorshipLanguage
             {
@@ -102,6 +106,55 @@ public class TutorshipService : ITutorshipService
         await _context.SaveChangesAsync();
 
         return true;
+    }
+
+    public async Task<TutorshipDto?> GetProfileAsync(string userId)
+    {
+        var tutorship = await _context.Tutorships
+            .Include(t => t.SystemUser)
+            .Include(t => t.TutorshipSubjects)
+            .Include(t => t.TutorshipLanguages)
+            .FirstOrDefaultAsync(t => t.SystemUserId == userId);
+
+        if (tutorship == null)
+            return null;
+
+        TutorshipDto newTutorshipDto =  new TutorshipDto
+        {
+            Id = tutorship.Id,
+            SystemUserId = tutorship.SystemUserId,
+            Bio = tutorship.Bio,
+            Street = tutorship.Street,
+            City = tutorship.City,
+            Province = tutorship.Province,
+            PostalCode = tutorship.PostalCode,
+            HighestAchievement = tutorship.HighestAchievement,
+            IsAvailable = tutorship.IsAvailable,
+            YearsOfExperience = tutorship.YearsOfExperience,
+            Age = tutorship.Age,
+            CreatedAt = tutorship.CreatedAt,
+            Rating = tutorship.Rating,
+            ProfilePhotoPath = tutorship.ProfilePhotoPath,
+            Name = tutorship.SystemUser.FirstName,
+            Surname = tutorship.SystemUser.LastName,
+            Email = tutorship.SystemUser.Email,
+            TutorshipSubjects = tutorship.TutorshipSubjects.Select(s => new TutorshipSubjectDto
+            {
+                Name = s.SubjectName,
+                Availability = s.Availability,
+                Outline = s.Outline
+            }).ToList(),
+
+            TutorshipLanguages = tutorship.TutorshipLanguages
+    .Where(l => l.Language != null) // Optional, skip nulls
+    .Select(l => new TutorshipLanguageDto
+    {
+        LanguageName = l.Language?.Name ?? "Unknown"
+    })
+    .ToList()
+
+        };
+        return newTutorshipDto;
     }
 
 
