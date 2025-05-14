@@ -93,6 +93,25 @@ namespace InhlwathiTutors.Controllers
 
             return Ok(profile);
         }
+
+        [HttpPost("subject")]
+        public async Task<IActionResult> CreateSubject([FromBody] CreateTutorshipSubjectDto dto)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return Unauthorized();
+
+            try
+            {
+                var created = await _tutorshipService.CreateTutorshipSubjectAsync(dto, user.Id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+
     }
 }
 
@@ -160,3 +179,27 @@ public class TutorshipLanguageDto
     public string ProficiencyLevel { get; set; }
 }
 
+public class CreateTutorshipSubjectDto
+{
+    [Required]
+    public string SubjectName { get; set; }
+
+    [Required]
+    public string Availability { get; set; }
+
+    [Required]
+    public string Outline { get; set; }
+
+    [Required]
+    [Range(0, double.MaxValue)]
+    public decimal HourlyRate { get; set; }
+
+    [Required]
+    public string Level { get; set; }
+
+    public string? CoverImagePath { get; set; }
+
+    public string? IntroVideoLink { get; set; }
+
+    public List<int>? LanguageIds { get; set; }  // Optional: if you want to link languages
+}

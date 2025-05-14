@@ -134,7 +134,6 @@ public class TutorshipService : ITutorshipService
             Age = tutorship.Age,
             CreatedAt = tutorship.CreatedAt,
             Rating = tutorship.Rating,
-            ProfilePhotoPath = tutorship.ProfilePhotoPath,
             Name = tutorship.SystemUser.FirstName,
             Surname = tutorship.SystemUser.LastName,
             Email = tutorship.SystemUser.Email,
@@ -154,8 +153,67 @@ public class TutorshipService : ITutorshipService
     .ToList()
 
         };
+        if (tutorship.ProfilePhotoPath != null)
+        {
+            newTutorshipDto.ProfilePhotoPath = ConvertImageToBase64(
+                Path.Combine(_environment.WebRootPath, tutorship.ProfilePhotoPath)
+            );
+        }
+
         return newTutorshipDto;
     }
+
+    public async Task<TutorshipSubject> CreateTutorshipSubjectAsync(CreateTutorshipSubjectDto dto, string userId)
+    {
+        var tutorship = await _context.Tutorships
+            .FirstOrDefaultAsync(t => t.SystemUserId == userId);
+
+        if (tutorship == null)
+            throw new Exception("No tutorship profile found for the user.");
+
+        var subject = new TutorshipSubject
+        {
+            SubjectName = dto.SubjectName,
+            Availability = dto.Availability,
+            Outline = dto.Outline,
+            HourlyRate = dto.HourlyRate,
+            Level = dto.Level,
+            CoverImagePath = dto.CoverImagePath,
+            IntroVideoLink = dto.IntroVideoLink,
+            TutorshipId = tutorship.Id
+        };
+
+        // Optional: handle LanguageIds if applicable
+        if (dto.LanguageIds != null)
+        {
+            subject.TutorshipSubjectLanguages = dto.LanguageIds
+                .Select(langId => new TutorshipSubjectLanguage
+                {
+                    LanguageId = langId,
+                    TutorshipSubject = subject
+                }).ToList();
+        }
+
+        _context.TutorshipSubjects.Add(subject);
+        await _context.SaveChangesAsync();
+
+        return subject;
+    }
+
+    public string ConvertImageToBase64(string imagePath)
+{
+        try
+        {
+        byte[] imageBytes = File.ReadAllBytes(imagePath); // Read image from file system
+            string base64String = Convert.ToBase64String(imageBytes); // Convert to Base64 string
+            return base64String;
+        } catch(Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    
+}
+
 
 
 }
