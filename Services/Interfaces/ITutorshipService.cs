@@ -7,4 +7,5 @@ public interface ITutorshipService
     Task<bool> ChangeUserModeAsync(string userId, string newMode);
     Task<TutorshipDto?> GetProfileAsync(string userId);
     Task<TutorshipSubject> CreateTutorshipSubjectAsync(CreateTutorshipSubjectDto dto, string userId);
+    Task<List<TutorshipSubjectDto>> GetSubjectsAsync(int? optionalTutorshipId, string userId);
 }

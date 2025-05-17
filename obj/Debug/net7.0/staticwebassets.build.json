@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4v7hcQV7+leuvExrSR7TAG/1mWbzsKqIg51MJ7kBlkA=",
+  "Hash": "5z7v+Bf1FMZXz+sZ1Sn4h2bmgso9L+0Zk+KdmL6KdYo=",
   "Source": "InhlwathiTutors",
   "BasePath": "_content/InhlwathiTutors",
   "Mode": "Default",
@@ -66,6 +66,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\tutor_6da502ad-0890-4299-85c8-767f48806bdf.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\source\\repos\\InhlwathiTutors\\wwwroot\\uploads\\tutor_c8d7eec2-8cc8-4657-82db-17e482b0b0bf.jpg",
+      "SourceId": "InhlwathiTutors",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\source\\repos\\InhlwathiTutors\\wwwroot\\",
+      "BasePath": "_content/InhlwathiTutors",
+      "RelativePath": "uploads/tutor_c8d7eec2-8cc8-4657-82db-17e482b0b0bf.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\tutor_c8d7eec2-8cc8-4657-82db-17e482b0b0bf.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\source\\repos\\InhlwathiTutors\\wwwroot\\uploads\\tutor_d1401e08-4845-4927-82e0-17a9b2a821ad.jpg",
+      "SourceId": "InhlwathiTutors",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\source\\repos\\InhlwathiTutors\\wwwroot\\",
+      "BasePath": "_content/InhlwathiTutors",
+      "RelativePath": "uploads/tutor_d1401e08-4845-4927-82e0-17a9b2a821ad.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\tutor_d1401e08-4845-4927-82e0-17a9b2a821ad.jpg"
     },
     {
       "Identity": "C:\\Users\\user\\source\\repos\\InhlwathiTutors\\wwwroot\\uploads\\tutor_db6a18e8-c1e7-4353-aaf4-3fbdd126167c.jpg",

@@ -139,7 +139,7 @@ public class TutorshipService : ITutorshipService
             Email = tutorship.SystemUser.Email,
             TutorshipSubjects = tutorship.TutorshipSubjects.Select(s => new TutorshipSubjectDto
             {
-                Name = s.SubjectName,
+                SubjectName = s.SubjectName,
                 Availability = s.Availability,
                 Outline = s.Outline
             }).ToList(),
@@ -175,6 +175,7 @@ public class TutorshipService : ITutorshipService
         {
             SubjectName = dto.SubjectName,
             Availability = dto.Availability,
+            DeliveryMode = dto.DeliveryMode,
             Outline = dto.Outline,
             HourlyRate = dto.HourlyRate,
             Level = dto.Level,
@@ -201,7 +202,7 @@ public class TutorshipService : ITutorshipService
     }
 
     public string ConvertImageToBase64(string imagePath)
-{
+    {
         try
         {
         byte[] imageBytes = File.ReadAllBytes(imagePath); // Read image from file system
@@ -211,8 +212,54 @@ public class TutorshipService : ITutorshipService
         {
             throw new Exception(ex.Message);
         }
-    
-}
+
+    }
+
+    public async Task<List<TutorshipSubjectDto>> GetSubjectsAsync(int? optionalTutorshipId, string userId)
+    {
+        int tutorshipId;
+
+        if (optionalTutorshipId.HasValue)
+        {
+            tutorshipId = optionalTutorshipId.Value;
+        }
+        else
+        {
+            var tutorship = await _context.Tutorships
+                .FirstOrDefaultAsync(t => t.SystemUserId == userId);
+
+            if (tutorship == null) return new List<TutorshipSubjectDto>();
+
+            tutorshipId = tutorship.Id;
+        }
+
+        var subjects = await _context.TutorshipSubjects
+            .Where(s => s.TutorshipId == tutorshipId)
+            .Include(s => s.TutorshipSubjectLanguages)
+                .ThenInclude(tsl => tsl.Language)
+            .ToListAsync();
+
+        var dtos = subjects.Select(s => new TutorshipSubjectDto
+        {
+            Id = s.Id,
+            SubjectName = s.SubjectName,
+            DeliveryMode = s.DeliveryMode,
+            Availability = s.Availability,
+            Outline = s.Outline,
+            HourlyRate = s.HourlyRate,
+            Level = s.Level,
+            CoverImagePath = s.CoverImagePath,
+            IntroVideoLink = s.IntroVideoLink,
+            Languages = s.TutorshipSubjectLanguages.Select(tsl => new SubjectLanguageDto
+            {
+                Id = tsl.Id,
+                LanguageId = tsl.LanguageId,
+                LanguageName = tsl.Language.Name
+            }).ToList()
+        }).ToList();
+
+        return dtos;
+    }
 
 
 

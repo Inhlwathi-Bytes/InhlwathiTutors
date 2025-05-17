@@ -3,6 +3,7 @@ using System;
 using InhlwathiTutors.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InhlwathiTutors.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250515164435_jsonigore")]
+    partial class jsonigore
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -210,10 +212,6 @@ namespace InhlwathiTutors.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("CoverImagePath")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("DeliveryMode")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<decimal>("HourlyRate")

@@ -112,7 +112,24 @@ namespace InhlwathiTutors.Controllers
             }
         }
 
+        [HttpGet("subjects")]
+        public async Task<IActionResult> GetSubjects([FromQuery] int? tutorshipId = null)
+        {
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized("User not authenticated.");
+
+            var subjects = await _tutorshipService.GetSubjectsAsync(tutorshipId, userId);
+            var response = new MyOfferedSubjectsResponse { Subjects = subjects };
+            return Ok(response);
+        }
+
     }
+}
+public class MyOfferedSubjectsResponse
+{
+    public List<TutorshipSubjectDto> Subjects { get; set; }
 }
 
 public class CreateTutorshipDto
@@ -168,15 +185,30 @@ public class TutorshipDto
 
 public class TutorshipSubjectDto
 {
-    public string Name { get; set; }
+    public int Id { get; set; }
+    public string SubjectName { get; set; }
     public string Availability { get; set; }
     public string Outline { get; set; }
+    public string DeliveryMode { get; set; }
+    public decimal HourlyRate { get; set; }
+    public string Level { get; set; }
+    public string? CoverImagePath { get; set; }
+    public string? IntroVideoLink { get; set; }
+
+    public List<SubjectLanguageDto> Languages { get; set; }
 }
+
+public class SubjectLanguageDto
+{
+    public int Id { get; set; }
+    public int LanguageId { get; set; }
+    public string LanguageName { get; set; } // Comes from `Language.Name`
+}
+
 
 public class TutorshipLanguageDto
 {
     public string LanguageName { get; set; }
-    public string ProficiencyLevel { get; set; }
 }
 
 public class CreateTutorshipSubjectDto
@@ -196,6 +228,9 @@ public class CreateTutorshipSubjectDto
 
     [Required]
     public string Level { get; set; }
+
+
+    public string DeliveryMode { get; set; }
 
     public string? CoverImagePath { get; set; }
 
