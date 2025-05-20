@@ -112,7 +112,7 @@ namespace InhlwathiTutors.Controllers
             }
         }
 
-        [HttpGet("subjects")]
+        [HttpGet("subjects/explore")]
         public async Task<IActionResult> GetSubjects([FromQuery] int? tutorshipId = null)
         {
             string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -120,12 +120,17 @@ namespace InhlwathiTutors.Controllers
             if (string.IsNullOrEmpty(userId))
                 return Unauthorized("User not authenticated.");
 
-            var subjects = await _tutorshipService.GetSubjectsAsync(tutorshipId, userId);
-            var response = new MyOfferedSubjectsResponse { Subjects = subjects };
+            var subjects = await _tutorshipService.GetAllExploreSubjectsAsync();
+            var response = new SubjectExploreResponse { Subjects = subjects };
             return Ok(response);
         }
 
     }
+}
+
+public class SubjectExploreResponse
+{
+    public List<SubjectExploreDto> Subjects { get; set; }
 }
 public class MyOfferedSubjectsResponse
 {
@@ -238,3 +243,25 @@ public class CreateTutorshipSubjectDto
 
     public List<int>? LanguageIds { get; set; }  // Optional: if you want to link languages
 }
+
+public class SubjectExploreDto
+{
+    public int SubjectId { get; set; }
+    public string SubjectName { get; set; }
+    public string Outline { get; set; }
+    public string Availability { get; set; }
+    public string Level { get; set; }
+    public decimal HourlyRate { get; set; }
+
+    // Tutor info
+    public string TutorName { get; set; }
+    public string TutorEmail { get; set; }
+    public string ProfilePhotoPath { get; set; }
+
+    // Language info (as a list)
+    public List<string> LanguageNames { get; set; }
+
+    // Ratings
+    public double? AverageRating { get; set; }
+}
+

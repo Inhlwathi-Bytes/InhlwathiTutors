@@ -24,6 +24,9 @@ namespace InhlwathiTutors.Data
         public DbSet<Language> Languages { get; set; }
         public DbSet<TutorshipLanguage> TutorshipLanguages { get; set; }
         public DbSet<TutorshipSubjectLanguage> TutorshipSubjectLanguages { get; set; }
+        public DbSet<SubjectReview> Reviews { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

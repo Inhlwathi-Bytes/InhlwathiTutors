@@ -8,4 +8,5 @@ public interface ITutorshipService
     Task<TutorshipDto?> GetProfileAsync(string userId);
     Task<TutorshipSubject> CreateTutorshipSubjectAsync(CreateTutorshipSubjectDto dto, string userId);
     Task<List<TutorshipSubjectDto>> GetSubjectsAsync(int? optionalTutorshipId, string userId);
+    Task<List<SubjectExploreDto>> GetAllExploreSubjectsAsync();
 }

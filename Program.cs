@@ -53,6 +53,7 @@ namespace InhlwathiTutors
 
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<ITutorshipService, TutorshipService>();
+            builder.Services.AddScoped<IBookingService, BookingService>();
 
             builder.Services.AddCors(options =>
             {

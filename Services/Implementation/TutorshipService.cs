@@ -191,7 +191,7 @@ public class TutorshipService : ITutorshipService
                 .Select(langId => new TutorshipSubjectLanguage
                 {
                     LanguageId = langId,
-                    TutorshipSubject = subject
+                    TutorshipSubjectId = tutorship.Id,
                 }).ToList();
         }
 
@@ -261,6 +261,53 @@ public class TutorshipService : ITutorshipService
         return dtos;
     }
 
+    public async Task<List<SubjectExploreDto>> GetAllExploreSubjectsAsync()
+    {
+        var subjects = await _context.TutorshipSubjects
+            .Include(s => s.Tutorship)
+                .ThenInclude(t => t.SystemUser)
+            .Include(s => s.TutorshipSubjectLanguages)
+                .ThenInclude(tsl => tsl.Language)
+            .Include(s => s.Reviews) // Needed to populate the AverageRating [NotMapped] property
+            .Select(s => new SubjectExploreDto
+            {
+                SubjectId = s.Id,
+                SubjectName = s.SubjectName,
+                Outline = s.Outline,
+                Availability = s.Availability,
+                Level = s.Level,
+                HourlyRate = s.HourlyRate,
 
+                TutorName = s.Tutorship.SystemUser.FirstName + " " + s.Tutorship.SystemUser.LastName,
+                TutorEmail = s.Tutorship.SystemUser.Email,
+                ProfilePhotoPath = s.Tutorship.ProfilePhotoPath, // Will be replaced below
+                LanguageNames = s.TutorshipSubjectLanguages
+                                .Select(tsl => tsl.Language.Name)
+                                .ToList(),
+
+                AverageRating = s.AverageRating
+            })
+            .ToListAsync();
+
+        // Convert image path to Base64 string
+        foreach (var subject in subjects)
+        {
+            if (!string.IsNullOrEmpty(subject.ProfilePhotoPath))
+            {
+                try
+                {
+
+                    subject.ProfilePhotoPath = ConvertImageToBase64(Path.Combine(_environment.WebRootPath, subject.ProfilePhotoPath));
+                }
+                catch (Exception ex)
+                {
+                    // Log or handle image conversion failure — for now we just skip it
+                    subject.ProfilePhotoPath = null;
+                }
+            }
+        }
+
+        return subjects;
+    }
 
 }

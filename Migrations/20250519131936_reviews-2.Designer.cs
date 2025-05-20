@@ -3,6 +3,7 @@ using System;
 using InhlwathiTutors.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,58 +11,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InhlwathiTutors.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250519131936_reviews-2")]
+    partial class reviews2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("InhlwathiTutors.Models.Booking", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("DurationMinutes")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Note")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("varchar(1000)");
-
-                    b.Property<DateTime>("ScheduledAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<string>("StudentId")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<int>("TutorshipSubjectId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
-
-                    b.HasIndex("TutorshipSubjectId");
-
-                    b.ToTable("Bookings");
-                });
 
             modelBuilder.Entity("InhlwathiTutors.Models.Language", b =>
                 {
@@ -472,25 +430,6 @@ namespace InhlwathiTutors.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("InhlwathiTutors.Models.Booking", b =>
-                {
-                    b.HasOne("InhlwathiTutors.Models.SystemUser", "SystemUser")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("InhlwathiTutors.Models.TutorshipSubject", "TutorshipSubject")
-                        .WithMany()
-                        .HasForeignKey("TutorshipSubjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SystemUser");
-
-                    b.Navigation("TutorshipSubject");
                 });
 
             modelBuilder.Entity("InhlwathiTutors.Models.SubjectReview", b =>

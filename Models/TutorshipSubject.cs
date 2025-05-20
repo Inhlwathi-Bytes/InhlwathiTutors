@@ -32,12 +32,17 @@ namespace InhlwathiTutors.Models
         public string? CoverImagePath { get; set; }
         public string? IntroVideoLink { get; set; }  // optional YouTube/Vimeo/etc.
 
+        public ICollection<SubjectReview> Reviews { get; set; }
+
+        [NotMapped]
+        public double? AverageRating => Reviews?.Any() == true ? Reviews.Average(r => r.Rating) : null;
+
         // Foreign Key
         [Required]
         [ForeignKey("Tutorship")]
         public int TutorshipId { get; set; }
         public Tutorship Tutorship { get; set; }
-        
+
         public ICollection<TutorshipSubjectLanguage> TutorshipSubjectLanguages { get; set; } = new List<TutorshipSubjectLanguage>();
 
     }
